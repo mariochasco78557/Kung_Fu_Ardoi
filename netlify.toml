@@ -1,0 +1,32 @@
+# ================================================================
+# NETLIFY — CONFIGURACIÓN KUNG FU ARDOI
+# ================================================================
+# Sube toda la carpeta del proyecto a GitHub,
+# luego conecta el repo en netlify.com (gratis).
+# ================================================================
+
+[build]
+  publish = "."
+
+# Activar Netlify Identity (necesario para Decap CMS)
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+# Redirecciones para el panel de admin
+[[redirects]]
+  from = "/admin"
+  to   = "/admin/index.html"
+  status = 200
+
+# Headers de seguridad
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

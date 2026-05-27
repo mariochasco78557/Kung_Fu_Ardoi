@@ -26,8 +26,8 @@ public_folder: "/uploads"
 # Idioma del panel de administración
 locale: 'es'
 
-# Permite guardar borradores antes de publicar
-publish_mode: editorial_workflow
+# FIX: editorial_workflow removed — requires extra Netlify config and breaks
+# the CMS for non-technical users. Changes now publish directly to GitHub.
 
 # ================================================================
 # COLECCIONES EDITABLES

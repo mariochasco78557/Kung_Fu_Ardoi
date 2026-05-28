@@ -1,30 +1,17 @@
-# ================================================================
-# DECAP CMS — CONFIGURACIÓN KUNG FU ARDOI
-# ================================================================
-
 backend:
   name: git-gateway
   branch: main
 
-# Carpeta donde se guardan las imágenes subidas
 media_folder: "uploads"
 public_folder: "/uploads"
 
-# Idioma del panel de administración
-locale: 'es'
-
-# FIX: editorial_workflow removed — requires extra Netlify config and breaks
-# the CMS for non-technical users. Changes now publish directly to GitHub.
-
-# ================================================================
-# COLECCIONES EDITABLES
-# ================================================================
+locale: "es"
 
 collections:
 
-  # ── 1. GALERÍA ──────────────────────────────────────────────
+  # ── GALERÍA ────────────────────────────────────────────────────
   - name: "galeria"
-    label: "📸 Galería"
+    label: "Galería"
     description: "Añade, edita y organiza las fotos del club."
     files:
       - label: "Fotos de la Galería"
@@ -35,27 +22,38 @@ collections:
             name: "items"
             widget: "list"
             label_singular: "Foto"
-            summary: "{{fields.titulo}} — {{fields.categoria}}"
             fields:
-              - { label: "Título",     name: "titulo",     widget: "string",
-                  hint: "Ej: VII Torneo Wushu Ardoi" }
-              - { label: "Categoría",  name: "categoria",  widget: "select",
-                  options:
-                    - { label: "Competición",   value: "competicion" }
-                    - { label: "Entrenamiento", value: "entrenamiento" }
-                    - { label: "Eventos",       value: "eventos" }
-                  default: "competicion" }
-              - { label: "Imagen",     name: "imagen",     widget: "image",
-                  hint: "Sube la foto aquí. Formatos: JPG, PNG, WebP." }
-              - { label: "Descripción", name: "descripcion", widget: "string",
-                  required: false, hint: "Descripción corta (opcional)" }
-              - { label: "Foto destacada (grande)", name: "destacada",
-                  widget: "boolean", default: false,
-                  hint: "Las fotos destacadas ocupan más espacio en la galería" }
+              - label: "Titulo"
+                name: "titulo"
+                widget: "string"
+                hint: "Ej: VII Torneo Wushu Ardoi"
+              - label: "Categoria"
+                name: "categoria"
+                widget: "select"
+                options:
+                  - label: "Competicion"
+                    value: "competicion"
+                  - label: "Entrenamiento"
+                    value: "entrenamiento"
+                  - label: "Eventos"
+                    value: "eventos"
+                default: "competicion"
+              - label: "Imagen"
+                name: "imagen"
+                widget: "image"
+                hint: "Sube la foto. Formatos: JPG, PNG, WebP."
+              - label: "Descripcion"
+                name: "descripcion"
+                widget: "string"
+                required: false
+              - label: "Foto destacada (ocupa mas espacio)"
+                name: "destacada"
+                widget: "boolean"
+                default: false
 
-  # ── 2. CAMPEONATOS ──────────────────────────────────────────
+  # ── CAMPEONATOS ────────────────────────────────────────────────
   - name: "campeonatos"
-    label: "🏆 Campeonatos"
+    label: "Campeonatos"
     description: "Actualiza los resultados y medalleros de cada torneo."
     files:
       - label: "Medallero y Torneos"
@@ -66,29 +64,49 @@ collections:
             name: "torneo_principal"
             widget: "object"
             fields:
-              - { label: "Nombre del torneo", name: "nombre",      widget: "string" }
-              - { label: "Año",               name: "anio",        widget: "number" }
-              - { label: "Descripción",       name: "descripcion", widget: "text" }
-              - { label: "Medallas de Oro",   name: "oro",         widget: "number" }
-              - { label: "Medallas de Plata", name: "plata",       widget: "number" }
-              - { label: "Medallas de Bronce",name: "bronce",      widget: "number" }
-              - { label: "Logro especial (ej: Clasificados para España 2026)",
-                  name: "logro_extra", widget: "string", required: false }
+              - label: "Nombre del torneo"
+                name: "nombre"
+                widget: "string"
+              - label: "Año"
+                name: "anio"
+                widget: "number"
+              - label: "Descripcion"
+                name: "descripcion"
+                widget: "text"
+              - label: "Medallas de Oro"
+                name: "oro"
+                widget: "number"
+              - label: "Medallas de Plata"
+                name: "plata"
+                widget: "number"
+              - label: "Medallas de Bronce"
+                name: "bronce"
+                widget: "number"
+              - label: "Logro especial"
+                name: "logro_extra"
+                widget: "string"
+                required: false
+                hint: "Ej: Clasificados para el Campeonato de Espana 2026"
           - label: "Historial de torneos"
             name: "historial"
             widget: "list"
             label_singular: "Torneo"
-            summary: "{{fields.nombre}} ({{fields.anio}})"
             fields:
-              - { label: "Nombre",   name: "nombre",  widget: "string" }
-              - { label: "Año",      name: "anio",    widget: "number" }
-              - { label: "Medallas", name: "resumen", widget: "string",
-                  hint: "Ej: 5 oro, 3 plata, 2 bronce" }
+              - label: "Nombre"
+                name: "nombre"
+                widget: "string"
+              - label: "Año"
+                name: "anio"
+                widget: "number"
+              - label: "Medallas"
+                name: "resumen"
+                widget: "string"
+                hint: "Ej: 5 oro, 3 plata, 2 bronce"
 
-  # ── 3. EVENTOS ──────────────────────────────────────────────
+  # ── EVENTOS ────────────────────────────────────────────────────
   - name: "eventos"
-    label: "📅 Eventos"
-    description: "Próximos eventos, cursos y actividades del club."
+    label: "Eventos"
+    description: "Proximos eventos, cursos y actividades del club."
     files:
       - label: "Agenda de eventos"
         name: "eventos"
@@ -98,73 +116,111 @@ collections:
             name: "items"
             widget: "list"
             label_singular: "Evento"
-            summary: "{{fields.titulo}} — {{fields.fecha}}"
             fields:
-              - { label: "Título",      name: "titulo",      widget: "string" }
-              - { label: "Fecha",       name: "fecha",       widget: "datetime",
-                  format: "DD/MM/YYYY", date_format: "DD/MM/YYYY",
-                  time_format: false }
-              - { label: "Tipo",        name: "tipo",        widget: "select",
-                  options:
-                    - { label: "Torneo",           value: "torneo" }
-                    - { label: "Curso técnico",    value: "curso" }
-                    - { label: "Exhibición",       value: "exhibicion" }
-                    - { label: "Puertas abiertas", value: "puertas-abiertas" }
-                    - { label: "Otro",             value: "otro" }
-                  default: "otro" }
-              - { label: "Descripción", name: "descripcion", widget: "text",
-                  required: false }
-              - { label: "Activo (mostrar en la web)", name: "activo",
-                  widget: "boolean", default: true }
+              - label: "Titulo"
+                name: "titulo"
+                widget: "string"
+              - label: "Fecha"
+                name: "fecha"
+                widget: "string"
+                hint: "Ej: 15/06/2025"
+              - label: "Tipo"
+                name: "tipo"
+                widget: "select"
+                options:
+                  - label: "Torneo"
+                    value: "torneo"
+                  - label: "Curso tecnico"
+                    value: "curso"
+                  - label: "Exhibicion"
+                    value: "exhibicion"
+                  - label: "Puertas abiertas"
+                    value: "puertas-abiertas"
+                  - label: "Otro"
+                    value: "otro"
+                default: "otro"
+              - label: "Descripcion"
+                name: "descripcion"
+                widget: "text"
+                required: false
+              - label: "Activo (mostrar en la web)"
+                name: "activo"
+                widget: "boolean"
+                default: true
 
-  # ── 4. NOTICIAS ─────────────────────────────────────────────
+  # ── NOTICIAS ───────────────────────────────────────────────────
   - name: "noticias"
-    label: "📰 Noticias"
-    description: "Artículos y noticias del club."
+    label: "Noticias"
+    description: "Articulos y noticias del club."
     folder: "content/noticias"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     label_singular: "Noticia"
-    summary: "{{title}} — {{date}}"
     fields:
-      - { label: "Título",           name: "title",     widget: "string" }
-      - { label: "Fecha",            name: "date",      widget: "datetime" }
-      - { label: "Resumen",          name: "resumen",   widget: "text",
-          hint: "Texto corto que aparece en la lista de noticias" }
-      - { label: "Imagen destacada", name: "imagen",    widget: "image",
-          required: false }
-      - { label: "Contenido",        name: "body",      widget: "markdown" }
-      - { label: "Publicada",        name: "publicada", widget: "boolean", default: true }
+      - label: "Titulo"
+        name: "title"
+        widget: "string"
+      - label: "Fecha"
+        name: "date"
+        widget: "datetime"
+      - label: "Resumen"
+        name: "resumen"
+        widget: "text"
+        hint: "Texto corto que aparece en la lista de noticias"
+      - label: "Imagen destacada"
+        name: "imagen"
+        widget: "image"
+        required: false
+      - label: "Contenido"
+        name: "body"
+        widget: "markdown"
+      - label: "Publicada"
+        name: "publicada"
+        widget: "boolean"
+        default: true
 
-  # ── 5. CONFIGURACIÓN DEL SITIO ──────────────────────────────
+  # ── CONFIGURACION ──────────────────────────────────────────────
   - name: "configuracion"
-    label: "⚙️ Configuración"
-    description: "Textos principales, datos de contacto y redes sociales."
+    label: "Configuracion"
+    description: "Textos principales, contacto y redes sociales."
     files:
-      - label: "Ajustes generales del sitio"
+      - label: "Ajustes generales"
         name: "config"
         file: "content/config.json"
         fields:
-          - label: "Hero — Textos"
+          - label: "Hero - Textos"
             name: "hero"
             widget: "object"
             fields:
-              - { label: "Lema principal", name: "lema1",
-                  widget: "string", default: "Disciplina · Respeto · Superación" }
-              - { label: "Subtítulo hero", name: "subtitulo",
-                  widget: "string",
-                  default: "Más que un arte marcial. Una forma de vida." }
+              - label: "Lema principal"
+                name: "lema1"
+                widget: "string"
+              - label: "Subtitulo hero"
+                name: "subtitulo"
+                widget: "string"
           - label: "Contacto"
             name: "contacto"
             widget: "object"
             fields:
-              - { label: "Email",     name: "email",     widget: "string" }
-              - { label: "Teléfono",  name: "telefono",  widget: "string" }
-              - { label: "Dirección", name: "direccion", widget: "string" }
-              - { label: "Instagram", name: "instagram", widget: "string" }
+              - label: "Email"
+                name: "email"
+                widget: "string"
+              - label: "Telefono"
+                name: "telefono"
+                widget: "string"
+              - label: "Direccion"
+                name: "direccion"
+                widget: "string"
+              - label: "Instagram"
+                name: "instagram"
+                widget: "string"
           - label: "SEO"
             name: "seo"
             widget: "object"
             fields:
-              - { label: "Título de la página", name: "title",       widget: "string" }
-              - { label: "Descripción (meta)",  name: "description", widget: "text" }
+              - label: "Titulo de la pagina"
+                name: "title"
+                widget: "string"
+              - label: "Descripcion meta"
+                name: "description"
+                widget: "text"

@@ -1,19 +1,6 @@
 # ================================================================
 # DECAP CMS — CONFIGURACIÓN KUNG FU ARDOI
 # ================================================================
-# Docs: https://decapcms.org/docs/
-#
-# OPCIÓN A (Netlify — recomendado):
-#   backend: name: git-gateway
-#   Activar Netlify Identity en tu panel de Netlify
-#
-# OPCIÓN B (GitHub Pages):
-#   Sustituir el backend por:
-#   backend:
-#     name: github
-#     repo: tu-usuario/kung-fu-ardoi
-#     branch: main
-# ================================================================
 
 backend:
   name: git-gateway
@@ -54,7 +41,7 @@ collections:
                   hint: "Ej: VII Torneo Wushu Ardoi" }
               - { label: "Categoría",  name: "categoria",  widget: "select",
                   options:
-                    - { label: "Competición",  value: "competicion" }
+                    - { label: "Competición",   value: "competicion" }
                     - { label: "Entrenamiento", value: "entrenamiento" }
                     - { label: "Eventos",       value: "eventos" }
                   default: "competicion" }
@@ -79,12 +66,12 @@ collections:
             name: "torneo_principal"
             widget: "object"
             fields:
-              - { label: "Nombre del torneo", name: "nombre",  widget: "string" }
-              - { label: "Año",               name: "anio",    widget: "number" }
-              - { label: "Descripción",        name: "descripcion", widget: "text" }
-              - { label: "Medallas de Oro",    name: "oro",    widget: "number" }
-              - { label: "Medallas de Plata",  name: "plata",  widget: "number" }
-              - { label: "Medallas de Bronce", name: "bronce", widget: "number" }
+              - { label: "Nombre del torneo", name: "nombre",      widget: "string" }
+              - { label: "Año",               name: "anio",        widget: "number" }
+              - { label: "Descripción",       name: "descripcion", widget: "text" }
+              - { label: "Medallas de Oro",   name: "oro",         widget: "number" }
+              - { label: "Medallas de Plata", name: "plata",       widget: "number" }
+              - { label: "Medallas de Bronce",name: "bronce",      widget: "number" }
               - { label: "Logro especial (ej: Clasificados para España 2026)",
                   name: "logro_extra", widget: "string", required: false }
           - label: "Historial de torneos"
@@ -113,17 +100,17 @@ collections:
             label_singular: "Evento"
             summary: "{{fields.titulo}} — {{fields.fecha}}"
             fields:
-              - { label: "Título",      name: "titulo",    widget: "string" }
-              - { label: "Fecha",       name: "fecha",     widget: "datetime",
+              - { label: "Título",      name: "titulo",      widget: "string" }
+              - { label: "Fecha",       name: "fecha",       widget: "datetime",
                   format: "DD/MM/YYYY", date_format: "DD/MM/YYYY",
                   time_format: false }
-              - { label: "Tipo",        name: "tipo",      widget: "select",
+              - { label: "Tipo",        name: "tipo",        widget: "select",
                   options:
-                    - { label: "Torneo",        value: "torneo" }
-                    - { label: "Curso técnico", value: "curso" }
-                    - { label: "Exhibición",    value: "exhibicion" }
+                    - { label: "Torneo",           value: "torneo" }
+                    - { label: "Curso técnico",    value: "curso" }
+                    - { label: "Exhibición",       value: "exhibicion" }
                     - { label: "Puertas abiertas", value: "puertas-abiertas" }
-                    - { label: "Otro",          value: "otro" }
+                    - { label: "Otro",             value: "otro" }
                   default: "otro" }
               - { label: "Descripción", name: "descripcion", widget: "text",
                   required: false }
@@ -140,14 +127,14 @@ collections:
     label_singular: "Noticia"
     summary: "{{title}} — {{date}}"
     fields:
-      - { label: "Título",    name: "title",      widget: "string" }
-      - { label: "Fecha",     name: "date",       widget: "datetime" }
-      - { label: "Resumen",   name: "resumen",    widget: "text",
+      - { label: "Título",           name: "title",     widget: "string" }
+      - { label: "Fecha",            name: "date",      widget: "datetime" }
+      - { label: "Resumen",          name: "resumen",   widget: "text",
           hint: "Texto corto que aparece en la lista de noticias" }
-      - { label: "Imagen destacada", name: "imagen", widget: "image",
+      - { label: "Imagen destacada", name: "imagen",    widget: "image",
           required: false }
-      - { label: "Contenido", name: "body",       widget: "markdown" }
-      - { label: "Publicada", name: "publicada",  widget: "boolean", default: true }
+      - { label: "Contenido",        name: "body",      widget: "markdown" }
+      - { label: "Publicada",        name: "publicada", widget: "boolean", default: true }
 
   # ── 5. CONFIGURACIÓN DEL SITIO ──────────────────────────────
   - name: "configuracion"
@@ -162,7 +149,7 @@ collections:
             name: "hero"
             widget: "object"
             fields:
-              - { label: "Lema principal (línea 1)", name: "lema1",
+              - { label: "Lema principal", name: "lema1",
                   widget: "string", default: "Disciplina · Respeto · Superación" }
               - { label: "Subtítulo hero", name: "subtitulo",
                   widget: "string",
@@ -179,5 +166,5 @@ collections:
             name: "seo"
             widget: "object"
             fields:
-              - { label: "Título de la página",    name: "title",       widget: "string" }
-              - { label: "Descripción (meta)",     name: "description", widget: "text" }
+              - { label: "Título de la página", name: "title",       widget: "string" }
+              - { label: "Descripción (meta)",  name: "description", widget: "text" }
